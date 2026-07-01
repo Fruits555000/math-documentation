@@ -4,5 +4,6 @@
 The basis of the notation is defined like this:
 
 $a\\{n\\}b = a \uparrow ^{n} b$ <br>
-$a\\{\\{n\\}\\}b = \underbrace{a\\{a\\{...\\{a\\}...\\}a\\}a}_ \text{n times} \hspace{0.5cm} \text{if n = 1}$ <br>
-$a\\{\\{n\\}\\}b = \underbrace{a\\{\\{n - 1\\}\\}a ... a\\{\\{n - 1\\}\\}a}_\text{n times} \hspace{0.5cm} \text {if n > 1}$ 
+$a\\{\underbrace{...}_ \text{k brackets}\\{n\\}\underbrace{...}_ \text{k brackets}//}b = \underbrace{a\\{\underbrace{...}_ \text{}a\\{...\\{a\\}...\\}a\\}a}_ \text{n times} \hspace{0.5cm} \text{if n = 1}$ <br>
+$a\\{\\{n\\}\\}b = \underbrace{a\\{\\{n - 1\\}\\}a ... a\\{\\{n - 1\\}\\}a}_ \text{n times} \hspace{0.5cm} \text {if n > 1}$ <br>
+$a\\{n\\}^{k}b = \underbrace{\\{...\\{a\\}...\\}}_ \text{k enclosed brackets}$
