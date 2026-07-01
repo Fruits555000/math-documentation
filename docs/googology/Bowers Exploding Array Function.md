@@ -31,4 +31,13 @@ Operator Notation is starting to burst at the seams, so let us introduce Linear 
 The basis for BEAF Linear Notation is defined as:
 
 $$\\{a, b, c, d\\} = a\\{c\\}^{d}b$$
-$$\therefore \left\\{\begin{array}{ll} \\{a, b, 1, 1//} = a^{b} \\\ \\{a, b, 1, d\\}
+$$\therefore \left\\{\begin{array}{ll} \\{a, b, 1, 1\\} = a^{b} \\\ \\{a, b, 1, d\\} = \underbrace{\\{a, a\\{a, a,...\\{a, a, d - 1\\}..., d - 1\\}, d - 1\\}}_ b \hspace{0.5cm} \text{if } d > 1 \\\ \\{a, b, c, d\\} = \underbrace{\\{a,\\{a,...\\{a, a, c - 1, d\\}..., c - 1, d\\}, c - 1, d\\}}_ b \hspace{0.5cm} \text{if } c > 1 \end{array} \right.$$
+
+Ones are considered defaults, so we can chop off the end of the array if it only contains ones. <br>
+This way, rule 1 can be simplified like this:
+
+$$\\{a, b\\} = a^{b}$$
+
+Rules two and three can also be somewhat simplified by relying on their recursive nature.
+
+$$\\{a, b, 1, d\\} = \underbrace{\\{a, a\\{a, a,...\\{a, a, d - 1\\}..., d - 1\\}, d - 1\\}}_ b$$
