@@ -31,13 +31,47 @@ Operator Notation is starting to burst at the seams, so let us introduce Linear 
 The basis for BEAF Linear Notation is defined as:
 
 $$\\{a, b, c, d\\} = a\\{c\\}^{d}b$$
-$$\therefore \left\\{\begin{array}{ll} \\{a, b, 1, 1\\} = a^{b} \\\ \\{a, b, 1, d\\} = \underbrace{\\{a, a\\{a, a,...\\{a, a, d - 1\\}..., d - 1\\}, d - 1\\}}_ b \hspace{0.5cm} \text{if } d > 1 \\\ \\{a, b, c, d\\} = \underbrace{\\{a,\\{a,...\\{a, a, c - 1, d\\}..., c - 1, d\\}, c - 1, d\\}}_ b \hspace{0.5cm} \text{if } c > 1 \end{array} \right.$$
+$$\therefore \left\\{\begin{array}{ll} \\{a, b, 1, 1\\} = a^{b} \\\ \\{a, b, 1, d\\} = \underbrace{\\{a, a\\{a, a,...\\{a, a, a, d - 1\\}..., d - 1\\}, d - 1\\}}_ b \hspace{0.5cm} \text{if } d > 1 \\\ \\{a, b, c, d\\} = \underbrace{\\{a,\\{a,...\\{a, a, c - 1, d\\}..., c - 1, d\\}, c - 1, d\\}}_ b \hspace{0.5cm} \text{if } c > 1 \end{array} \right.$$
 
 Ones are considered defaults, so we can chop off the end of the array if it only contains ones. <br>
 This way, rule 1 can be simplified like this:
 
 $$\\{a, b\\} = a^{b}$$
 
-Rules two and three can also be somewhat simplified by relying on their recursive nature.
+Rules two and three can also be (somewhat) simplified by relying on their recursive nature.
 
-$$\\{a, b, 1, d\\} = \underbrace{\\{a, a\\{a, a,...\\{a, a, d - 1\\}..., d - 1\\}, d - 1\\}}_ b$$
+$$\\{a, b, 1, d\\} = \underbrace{\\{a, a\\{a, a,...\\{a, a, a, d - 1\\}..., d - 1\\}, d - 1\\}}_ b$$
+$$= \\{a, a, \underbrace{\\{a, a,...\\{a, a, a, d - 1\\}..., d - 1\\}}_ \text{b - 1} ,d - 1\\} = \\{a, a, \\{a, b - 1, 1, d\\}, d - 1\\}$$ 
+$$\\{a, b, c, d\\} = \underbrace{\\{a,\\{a,...\\{a, a, c - 1, d\\}..., c - 1, d\\}, c - 1, d\\}}_ b$$
+$$= \\{a, \underbrace{\\{a,...\\{a, a, c - 1, d\\}..., c - 1, d\\}}_ \text{b - 1} ,c - 1, d\\} = \\{a,\\{a, b - 1, c, d\\}, c - 1, d\\}$$
+
+You might have noticed that there is a problem with this refactoring. We have specified an inductive rule, but no bace case. So in both cases, $b$ will keep decreasing forever. To fix this, we add a new rule that explains what happens when $b$ reaches 1.
+
+$$\\{a, 1, c, d\\} = a$$
+
+Let's recap our current ruleset for BEAF linear notation.
+
+- $\\{a, b, 1, 1\\} = \\{a, b\\} = a^{b}$
+- $\\{a, 1, c, d\\} = a$
+- $\\{a, b, 1, d\\} = \\{a, a,\\{a, b - 1, 1, d\\}, d - 1\\} \hspace{0.5cm} \text{if } b \text{ and } d > 1$
+- $\\{a, b, c, d\\} = \\{a,\\{a, b - 1, c, d\\}, c - 1, d\\} \hspace{0.5cm} \text{if } b \text{ and } c > 1$
+
+With our new, simplified rules, a pattern is faintly visible in the final two terms. With this knowledge, we can add a fifth argument.
+
+- $\\{a, b\\} = a^{b}$
+- $\\{a, 1, c, d, e\\} = a$
+- $\\{a, b, 1, 1, e\\} = \\{a, a, a,\\{a, b - 1, 1, 1, e\\}, e - 1\\} \hspace{0.5cm} \text{if } b \text{ and } e > 1$
+- $\\{a, b, 1, d, e\\} = \\{a, a,\\{a, b - 1, 1, d, e\\}, d - 1, e\\} \hspace{0.5cm} \text{if } b \text{ and } d > 1$
+- $\\{a, b, c, d, e\\} = \\{a,\\{a, b - 1, c, d, e\\}, c - 1, d, e\\} \hspace{0.5cm} \text{if } b \text{ and } c > 1$
+
+And a sixth...
+
+- $\\{a, b\\} = a^{b}$
+- $\\{a, 1, c, d, e, f\\} = a$
+- $\\{a, b, 1, 1, 1, f\\} = \\{a, a, a, a,\\{a, b - 1, 1, 1, 1, f\\}, f - 1\\} \hspace{0.5cm} \text{if } b \text{ and } f > 1$
+- $\\{a, b, 1, 1, e, f\\} = \\{a, a, a,\\{a, b - 1, 1, 1, e, f\\}, e - 1, f\\} \hspace{0.5cm} \text{if } b \text{ and } e > 1$
+- $\\{a, b, 1, d, e, f\\} = \\{a, a,\\{a, b - 1, 1, d, e, f\\}, d - 1, e, f\\} \hspace{0.5cm} \text{if } b \text{ and } d > 1$
+- $\\{a, b, c, d, e, f\\} = \\{a,\\{a, b - 1, c, d, e, f\\}, c - 1, d, e, f\\} \hspace{0.5cm} \text {if } b \text{ and } c > 1$
+
+
+
