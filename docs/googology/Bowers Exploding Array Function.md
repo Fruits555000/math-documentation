@@ -73,5 +73,32 @@ And a sixth...
 - $\\{a, b, 1, d, e, f\\} = \\{a, a,\\{a, b - 1, 1, d, e, f\\}, d - 1, e, f\\} \hspace{0.5cm} \text{if } b \text{ and } d > 1$
 - $\\{a, b, c, d, e, f\\} = \\{a,\\{a, b - 1, c, d, e, f\\}, c - 1, d, e, f\\} \hspace{0.5cm} \text {if } b \text{ and } c > 1$
 
+We should generalise this to an arbitrary number of terms. To keep this concise, we will introduce some terminology.
 
+- The first entry $a$ is the **base**
+- The second entry, $b$, is the **prime**
+- After the prime, the first non-1 entry is the **pilot**
+- The entry immediately before the pilot is the **copilot**
+- All entries before the copilot are the **passengers**
+- The value of the array is written as $v(A)$
 
+Using these terms, we can completely describe BEAF linear notation. <br>
+<br>
+Let $b$ be the base and $p$ be the prime.
+- If there is no pilot (that is all entries after $p$ have a value of one) then $v(A) = b^{p}$ **(Base Rule)**
+- If $p$ has a value of one, $v(A) = b$  **(Prime Rule)**
+- Otherwise... **(Catastrophic Rule)**
+   1. Replace the copilot with the copy of the original array, but with $p$ decreased by one
+   2. Decrease the value of the pilot by one
+   3. Set all passengers to $b$
+
+Now with that out of the way, we can go onto the next section.
+
+## Multidimensional Arrays
+
+We'll introduce a new operator, b array of a.
+$$b&a = \underbrace{\\{a, a,..., a, a\\}}_ \text{b copies of a}$$
+This function "diagonalises" through everything we have done so far on this page. If you are familiar with the fast-growing hierarchy, then $n&n$ is is about the level of $f_{\omega^{\omega}}(n)$. <br>
+<br>
+To continue extending array notation, we neet to take a leap of intuition. <br>
+$b&a$ is vaguely similar to 
